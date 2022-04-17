@@ -13,9 +13,8 @@ public class Program {
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Connection conn = DB.getConnection();
-        Seller seller = new Seller(1,"Moacir","moacir@gmail.com", sdf.parse("12/04/2002"),18000D);
+        Department department = new Department(1, "Books");
+        Seller seller = new Seller(1, "Moacir", "moacir@gmail.com", sdf.parse("12/04/2002"), 18000D, department);
         System.out.println(seller);
-        Department department = new Department(1,"Books");
-        System.out.println(department);
     }
 }

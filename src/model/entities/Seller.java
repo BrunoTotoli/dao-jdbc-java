@@ -9,13 +9,15 @@ public class Seller {
     private String email;
     private Date birthDate;
     private Double baseSalary;
+    private Department department;
 
-    public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary) {
+    public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary, Department department) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.baseSalary = baseSalary;
+        this.department = department;
     }
 
     public Seller() {
@@ -29,6 +31,7 @@ public class Seller {
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 ", baseSalary=" + baseSalary +
+                ", department=" + department +
                 '}';
     }
 
@@ -47,6 +50,14 @@ public class Seller {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public void setId(Integer id) {
