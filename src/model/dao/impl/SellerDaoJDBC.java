@@ -6,6 +6,7 @@ import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,13 +49,7 @@ public class SellerDaoJDBC implements SellerDao {
             statement.setInt(1, id);
             rs = statement.executeQuery();
             if (rs.next()) {
-                seller = new Seller(rs.getInt("Id"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getDate("BirthDate"),
-                        rs.getDouble("BaseSalary"),
-                        new Department(rs.getInt("DepartmentId"),
-                                rs.getString("DepName")));
+                seller = instantiateSeller(rs, instantiateDepartment(rs));
                 return seller;
             }
             return null;
@@ -70,5 +65,19 @@ public class SellerDaoJDBC implements SellerDao {
     @Override
     public List<Seller> findAll() {
         return null;
+    }
+
+    private Seller instantiateSeller(ResultSet rs, Department department) throws SQLException {
+        return new Seller(rs.getInt("Id"),
+                rs.getString("Name"),
+                rs.getString("Email"),
+                rs.getDate("BirthDate"),
+                rs.getDouble("BaseSalary"),
+                department);
+    }
+
+    private Department instantiateDepartment(ResultSet rs) throws SQLException {
+        return new Department(rs.getInt("DepartmentId"),
+                rs.getString("DepName"));
     }
 }
