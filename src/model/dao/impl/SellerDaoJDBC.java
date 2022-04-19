@@ -29,11 +29,13 @@ public class SellerDaoJDBC implements SellerDao {
                     "(Name, Email, BirthDate, BaseSalary, DepartmentId)" +
                     "VALUES" +
                     "(?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+
             preparedStatement.setString(1, seller.getName());
             preparedStatement.setString(2, seller.getEmail());
             preparedStatement.setDate(3, new Date(seller.getBirthDate().getTime()));
             preparedStatement.setDouble(4, seller.getBaseSalary());
             preparedStatement.setInt(5, seller.getDepartment().getId());
+
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = preparedStatement.getGeneratedKeys();
