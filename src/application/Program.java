@@ -38,9 +38,12 @@ public class Program {
         System.out.println("\n---------------------Seller Update--------------------------------");
         Seller sellerUpdate = sellerDao.findById(16);
         sellerUpdate.setName("Jurasndir");
-        sellerDao.update(sellerUpdate);
+        //sellerDao.update(sellerUpdate);
         System.out.println("Update Complete");
         System.out.println(sellerDao.findById(16));
+
+        System.out.println("\n---------------------Seller Delete--------------------------------");
+        sellerDao.deleteById(16);
 
 
     }
