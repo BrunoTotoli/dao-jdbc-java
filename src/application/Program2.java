@@ -13,7 +13,7 @@ public class Program2 {
         dep.setName("Refrigerantes");
         // departmentDao.update(dep);
         System.out.println(departmentDao.findById(10));
-
+        System.out.println(departmentDao.findAll());
 
 
     }
