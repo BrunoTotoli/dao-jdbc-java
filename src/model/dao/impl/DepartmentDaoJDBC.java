@@ -24,9 +24,9 @@ public class DepartmentDaoJDBC implements DepartmentDao {
             statement = conn.prepareStatement("insert into department(name)" +
                     "values (?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, department.getName());
-           int rowsAffected = statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
             rs = statement.getGeneratedKeys();
-            if(rowsAffected > 0) {
+            if (rowsAffected > 0) {
                 if (rs.next()) {
                     department.setId(rs.getInt(1));
                 }
@@ -72,7 +72,27 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     @Override
     public Department findById(Integer id) {
-        return null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = conn.prepareStatement("select * from department where id = ? ");
+            statement.setInt(1, id);
+            rs = statement.executeQuery();
+
+            if (rs.next()) {
+                Department dep = new Department(rs.getInt(1), rs.getString(2));
+                return dep;
+            }
+            return null;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(statement);
+        }
+
+
     }
 
     @Override

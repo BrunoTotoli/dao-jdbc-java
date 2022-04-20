@@ -11,7 +11,9 @@ public class Program2 {
         Department dep = new Department(10, "Refrescos");
         //departmentDao.insert(dep);
         dep.setName("Refrigerantes");
-        departmentDao.update(dep);
+        // departmentDao.update(dep);
+        System.out.println(departmentDao.findById(10));
+
 
 
     }
